@@ -1,4 +1,3 @@
-/* Report 11 (Matsu) BINGO GAME */
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
@@ -171,9 +170,16 @@ int main(void) {
 
     /* 終了表示 */
     printf("\e[?25l");
-    for (i = 0; i < 30; i++) {
+    for (i = 0; i < 32; i++) {
         printf("\x1b[38;5;%dm", rand() % 256);
-        printf("****BINGO!****\n");
+        for (j = 0; j < i%9; j++) {
+            printf("*");
+        }
+        printf("BINGO!");
+        for (j = 0; j < 8 - i%9; j++) {
+            printf("*");
+        }
+        printf("\n");
         time_t now = clock() + CLOCKS_PER_SEC / 10;
         while (now > clock());
         printf("\x1b[1A");
